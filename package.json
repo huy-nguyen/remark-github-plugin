@@ -1,0 +1,19 @@
+{
+  "name": "remark-github-plugin",
+  "version": "0.1.0",
+  "description": "Remark plugin to inline GitHub source code into markdown file as code blocks",
+  "keywords": [
+    "remark",
+    "github",
+    "unified"
+  ],
+  "author": "Huy Nguyen <me@huynguyen.io> (https://www.huynguyen.io/)",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "main": "lib/index.js",
+  "scripts": {
+  },
+  "devDependencies": {
+  }
+}
