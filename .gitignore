@@ -6,3 +6,4 @@ lib/*
 dist/*
 es/*
 .rpt2_cache
+junit.xml
