@@ -1,9 +1,9 @@
 import {
-  IOptions,
+  Options,
   transform,
 } from './transform';
 
-const attacher = (options: IOptions) => {
+const attacher = (options: Options) => {
   return transform(options);
 };
 

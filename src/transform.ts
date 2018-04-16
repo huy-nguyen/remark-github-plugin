@@ -5,11 +5,17 @@ import {
 import {
   fetchGithubFile,
 } from './fetchGithubContent';
+import {
+  wrapInComment,
+} from './wrapInComment';
 
-export interface IOptions {
+export type Options = {
   marker: string;
   token: string;
-}
+} & (
+  {insertEllipsisComments: true, ellipsisPhrase: string} |
+  {insertEllipsisComments: false}
+);
 
 interface INodeToChange {
   node: any; // Actually a remark paragraph node:
@@ -81,7 +87,8 @@ const checkNode = (embedMarker: string, node: any): CheckResult => {
   }
 
 };
-export const transform = ({marker, token}: IOptions) => (tree: any) => new Promise(async (resolve) => {
+export const transform = (options: Options) => (tree: any) => new Promise(async (resolve) => {
+  const {marker, token} = options;
   const nodesToChange: INodeToChange[] = [];
   const visitor = (node: any) => {
     const checkResult = checkNode(marker, node);
@@ -103,7 +110,13 @@ export const transform = ({marker, token}: IOptions) => (tree: any) => new Promi
     if (range === undefined) {
       fileContent = rawFileContent;
     } else {
-      fileContent = extractLines(rawFileContent, range);
+      let ellipsisComment: string | undefined;
+      if (options.insertEllipsisComments === true) {
+        ellipsisComment = wrapInComment(options.ellipsisPhrase, language);
+      } else {
+        ellipsisComment = undefined;
+      }
+      fileContent = extractLines(rawFileContent, range, ellipsisComment);
     }
 
     node.value = fileContent;
