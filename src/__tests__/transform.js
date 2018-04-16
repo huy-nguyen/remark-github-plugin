@@ -34,17 +34,22 @@ describe('Remark transformer', () => {
       const expected = fs.readFileSync(expectedFilePath, 'utf8');
 
       const optionsFilePath = path.join (fixtureDir, optionsFileName);
-      let options;
+      let specifiedOPtions;
       try {
-        options = require(optionsFilePath);
+        specifiedOPtions = require(optionsFilePath);
       } catch(e) {
-        options = {};
+        specifiedOPtions = {};
       }
+
+      const options = {
+        ...specifiedOPtions,
+        token: process.env.GITHUB_TOKEN,
+      };
 
       const processor = remark().data(
         // Need this setting so that code blocks with no language is rendered as
         // code blocks:
-        'settings', {fences: true}).use(plugin, options
+        'settings', {fences: true}).use(plugin, options,
       );
       processor.process(input, (err, actual) => {
         if (err) {

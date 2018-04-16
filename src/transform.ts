@@ -1,7 +1,11 @@
 import visit from 'unist-util-visit';
+import {
+  fetchGithubFile,
+} from './fetchGithubContent';
 
 export interface IOptions {
   marker: string;
+  token: string;
 }
 
 interface INodeToChange {
@@ -74,7 +78,7 @@ const checkNode = (embedMarker: string, node: any): CheckResult => {
   }
 
 };
-export const transform = ({marker}: IOptions) => (tree: any) => new Promise((resolve) => {
+export const transform = ({marker, token}: IOptions) => (tree: any) => new Promise(async (resolve) => {
   const nodesToChange: INodeToChange[] = [];
   const visitor = (node: any) => {
     const checkResult = checkNode(marker, node);
@@ -86,11 +90,12 @@ export const transform = ({marker}: IOptions) => (tree: any) => new Promise((res
 
   visit(tree, 'paragraph', visitor);
 
-  for (const {node, link, language, range} of nodesToChange) {
+  for (const {node, link, language} of nodesToChange) {
     node.type = 'code';
     node.children = undefined;
     node.lang = (language === undefined) ? null : language;
-    node.value = `const link = '${link}';\nconst range = '${range}';`;
+    const fileContent = await fetchGithubFile(link, token);
+    node.value = fileContent;
   }
   resolve();
 });
