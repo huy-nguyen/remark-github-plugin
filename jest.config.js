@@ -5,6 +5,9 @@ module.exports = {
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   coveragePathIgnorePatterns: ['/node_modules/', 'setupTests.js'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!lodash-es)',
+  ],
   moduleFileExtensions: [
     'ts',
     'tsx',
