@@ -12,6 +12,7 @@ module.exports = {
     'jsx',
     'json',
     'node',
+    'md',
   ],
   setupFiles: [
     '<rootDir>/src/setupTests.js',
