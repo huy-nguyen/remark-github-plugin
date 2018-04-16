@@ -7,6 +7,11 @@
     "github",
     "unified"
   ],
+  "files": [
+    "dist",
+    "lib",
+    "es"
+  ],
   "author": "Huy Nguyen <me@huynguyen.io> (https://www.huynguyen.io/)",
   "license": "MIT",
   "dependencies": {
