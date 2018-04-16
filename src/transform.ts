@@ -67,7 +67,7 @@ const checkNode = (embedMarker: string, node: any): CheckResult => {
   }
 
 };
-export const transform = ({marker}: IOptions) => (tree: any) => {
+export const transform = ({marker}: IOptions) => (tree: any) => new Promise((resolve) => {
   const visitor = (node: any) => {
     const checkResult = checkNode(marker, node);
     if (checkResult.isCandidate === true) {
@@ -80,4 +80,5 @@ export const transform = ({marker}: IOptions) => (tree: any) => {
   };
 
   visit(tree, 'paragraph', visitor);
-};
+  resolve();
+});
