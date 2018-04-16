@@ -1,10 +1,53 @@
-import fetch from 'node-fetch';
+import parse from 'github-url-parse';
+import fetch, {
+  Response,
+} from 'node-fetch';
 
-export const fetchGithubFile = async () => {
-  // tslint:disable-next-line:max-line-length
-  const url = 'https://api.github.com/repos/huy-nguyen/squarify/contents/.babelrc?branch=d7074c2c91cfceeb9a91bd995a7f92a1e6702886';
-  const response = await fetch(url);
-  const {content: base64Content} = await response.json();
-  const contentAsString = Buffer.from(base64Content, 'base64').toString('utf8');
-  return contentAsString;
+export const fetchGithubFile = async (githubUrl: string, token: string): Promise<string> => {
+
+  const parseResult = parse(githubUrl);
+  if (parseResult !== null) {
+    // If the provided URL is a valid GitHub URL:
+    const {branch, path, repo, user} = parseResult;
+    const fetchUrl = `https://api.github.com/repos/${user}/${repo}/contents/${path}?branch=${branch}`;
+
+    let response: Response;
+    try {
+      response = await fetch(fetchUrl, {
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      });
+
+      // If AJAX call succeeds:
+
+      const json = await response.json();
+      if (response.ok === true) {
+        // If requested URL actually exists on GitHub:
+        if (json.type === 'file') {
+          // If fetched content is a file instead of directory:
+          const contentAsString = Buffer.from(json.content, 'base64').toString('utf8');
+          return contentAsString;
+        } else {
+          throw new Error(githubUrl + ' is not a file');
+        }
+      } else {
+        // Try to create a nice error message if content doesn't exist for given URL:
+        const {statusText} = response;
+
+        let errorMessage;
+        if (json.message) {
+          errorMessage = `${statusText}: ${json.message}`;
+        } else {
+          errorMessage = statusText;
+        }
+        throw new Error(errorMessage);
+      }
+
+    } catch (e) {
+      throw new Error(e);
+    }
+  } else {
+    throw new Error(githubUrl + ' is not an accepted GitHub URL');
+  }
 };

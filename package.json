@@ -9,7 +9,9 @@
   ],
   "author": "Huy Nguyen <me@huynguyen.io> (https://www.huynguyen.io/)",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "github-url-parse": "0.1.0"
+  },
   "main": "lib/index.js",
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
