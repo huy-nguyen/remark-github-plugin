@@ -26,7 +26,7 @@
     "tslint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "test": "jest --verbose --coverage",
     "test:watch": "jest --watch --verbose",
-    "test:ci": "jest --ci --verbose --coverage --runInBand --testResultsProcessor=\"jest-junit\"",
+    "test:ci": "jest --config=jestCI.config.js --ci --verbose --coverage --runInBand --testResultsProcessor=\"jest-junit\"",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "tsc": "tsc --noEmit",
