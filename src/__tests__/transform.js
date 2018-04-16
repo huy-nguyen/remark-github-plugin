@@ -1,12 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 import remark from 'remark';
-import plugin from '../index';
+import {
+  getAttacher,
+} from '../index';
+import nodeFetch from 'node-fetch';
+import Cache from 'async-disk-cache';
 
 const fixtureDirName = '__fixtures__';
 const inputFileName = 'input.md';
 const expectedFileName = 'expected.md';
-const optionsFileName = 'options.js';
+const configFileName = 'config.js';
+const cacheDirName = 'cache';
 
 describe('Remark transformer', () => {
   const fixturesDir = path.resolve(path.join(__dirname, '..'), fixtureDirName);
@@ -24,7 +29,7 @@ describe('Remark transformer', () => {
   // Generate tests programatically:
   for (const directory of directories) {
     const caseName = directory.split('-').join(' ');
-    test(caseName, (done) => {
+    test(caseName, async (done) => {
       const fixtureDir = path.join(fixturesDir, directory);
 
       const inputFilePath = path.join(fixtureDir, inputFileName);
@@ -33,12 +38,16 @@ describe('Remark transformer', () => {
       const expectedFilePath = path.join(fixtureDir, expectedFileName);
       const expected = fs.readFileSync(expectedFilePath, 'utf8');
 
-      const optionsFilePath = path.join (fixtureDir, optionsFileName);
-      let specifiedOPtions;
+      const cacheDir = path.join(fixtureDir, cacheDirName);
+
+      const optionsFilePath = path.join (fixtureDir, configFileName);
+      let specifiedOPtions, testConfig;
       try {
-        specifiedOPtions = require(optionsFilePath);
+        testConfig = require(optionsFilePath);
+        specifiedOPtions = testConfig.pluginOptions;
       } catch(e) {
         specifiedOPtions = {};
+        testConfig = {};
       }
 
       const options = {
@@ -46,17 +55,43 @@ describe('Remark transformer', () => {
         token: process.env.GITHUB_TOKEN,
       };
 
+      const mockFetch = jest.fn((...args) => nodeFetch(...args));
+
+      // Create a cache we can totally control so that we can
+      // clean up later:
+      let mockCache;
+      if (options.useCache) {
+        mockCache = new Cache(options.cacheKey, {
+          location: cacheDir,
+        });
+        await mockCache.clear();
+      }
+      const plugin = getAttacher({
+        _fetch: mockFetch,
+        _cache: mockCache,
+      });
+
       const processor = remark().data(
         // Need this setting so that code blocks with no language is rendered as
         // code blocks:
         'settings', {fences: true}).use(plugin, options,
       );
-      processor.process(input, (err, actual) => {
+      processor.process(input, async (err, actual) => {
         if (err) {
           throw new Error(err);
         }
 
         expect(actual && actual.contents).toEqual(expected);
+
+        if (testConfig.assertFetchCalls) {
+          if (typeof testConfig.assertFetchCalls === 'number') {
+            expect(mockFetch.mock.calls).toHaveLength(testConfig.assertFetchCalls);
+          }
+        }
+
+        if (options.useCache) {
+          await mockCache.clear();
+        }
         done();
       });
     });

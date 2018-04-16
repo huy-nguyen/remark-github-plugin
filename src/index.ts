@@ -6,6 +6,7 @@ import {
 
 export interface ITestOptions {
   _fetch: typeof nodeFetch;
+  _cache: any;
 }
 
 export const getAttacher = (testOptions?: ITestOptions) => {

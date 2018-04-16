@@ -1,3 +1,4 @@
+import AsyncCache from 'async-disk-cache';
 import nodeFetch from 'node-fetch';
 import visit from 'unist-util-visit';
 import {
@@ -19,6 +20,9 @@ export type Options = {
 } & (
   {insertEllipsisComments: true, ellipsisPhrase: string} |
   {insertEllipsisComments: false}
+) & (
+  {useCache: true, cacheKey: string} |
+  {useCache: false}
 );
 
 interface INodeToChange {
@@ -91,15 +95,32 @@ const checkNode = (embedMarker: string, node: any): CheckResult => {
   }
 
 };
+
+type CacheInTransform = {
+  useCache: true, cache: any;
+} | {
+  useCache: false;
+};
 export const transform =
     (options: Options, testOptions?: ITestOptions) => (tree: any) => new Promise(async (resolve) => {
 
-  let fetchFunction: typeof nodeFetch;
+  let fetchFunction: typeof nodeFetch, cacheSettings: CacheInTransform;
   if (testOptions === undefined) {
     fetchFunction = nodeFetch;
+    if (options.useCache === true) {
+      cacheSettings = {useCache: true, cache: new AsyncCache(options.cacheKey)};
+    } else {
+      cacheSettings = {useCache: false};
+    }
   } else {
     fetchFunction = testOptions._fetch;
+    if (options.useCache === true) {
+      cacheSettings = {useCache: true, cache: testOptions._cache};
+    } else {
+      cacheSettings = {useCache: false};
+    }
   }
+
   const {marker, token} = options;
   const nodesToChange: INodeToChange[] = [];
   const visitor = (node: any) => {
@@ -116,7 +137,22 @@ export const transform =
     node.type = 'code';
     node.children = undefined;
     node.lang = (language === undefined) ? null : language;
-    const rawFileContent = await fetchGithubFile(link, token, fetchFunction);
+
+    // If cache is enabled, attempt to read from the cache before sending AJAX
+    // request:
+    let rawFileContent: string;
+    if (cacheSettings.useCache === true) {
+      const {cache} = cacheSettings;
+      const cacheCheckResult = await cache.get(link);
+      if (cacheCheckResult.isCached === true) {
+        rawFileContent = cacheCheckResult.value;
+      } else {
+        rawFileContent = await fetchGithubFile(link, token, fetchFunction);
+        await cache.set(link, rawFileContent);
+      }
+    } else {
+      rawFileContent = await fetchGithubFile(link, token, fetchFunction);
+    }
 
     let fileContent: string;
     if (range === undefined) {

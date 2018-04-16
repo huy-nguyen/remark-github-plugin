@@ -1,3 +1,4 @@
 node_modules
 coverage
 .env
+src/__fixtures__/*/cache
