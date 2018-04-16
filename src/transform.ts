@@ -1,3 +1,4 @@
+import nodeFetch from 'node-fetch';
 import visit from 'unist-util-visit';
 import {
   extractLines,
@@ -5,6 +6,9 @@ import {
 import {
   fetchGithubFile,
 } from './fetchGithubContent';
+import {
+  ITestOptions,
+} from './index';
 import {
   wrapInComment,
 } from './wrapInComment';
@@ -87,7 +91,15 @@ const checkNode = (embedMarker: string, node: any): CheckResult => {
   }
 
 };
-export const transform = (options: Options) => (tree: any) => new Promise(async (resolve) => {
+export const transform =
+    (options: Options, testOptions?: ITestOptions) => (tree: any) => new Promise(async (resolve) => {
+
+  let fetchFunction: typeof nodeFetch;
+  if (testOptions === undefined) {
+    fetchFunction = nodeFetch;
+  } else {
+    fetchFunction = testOptions._fetch;
+  }
   const {marker, token} = options;
   const nodesToChange: INodeToChange[] = [];
   const visitor = (node: any) => {
@@ -104,7 +116,7 @@ export const transform = (options: Options) => (tree: any) => new Promise(async 
     node.type = 'code';
     node.children = undefined;
     node.lang = (language === undefined) ? null : language;
-    const rawFileContent = await fetchGithubFile(link, token);
+    const rawFileContent = await fetchGithubFile(link, token, fetchFunction);
 
     let fileContent: string;
     if (range === undefined) {

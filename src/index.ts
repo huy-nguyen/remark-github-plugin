@@ -1,10 +1,18 @@
+import nodeFetch from 'node-fetch';
 import {
   Options,
   transform,
 } from './transform';
 
-const attacher = (options: Options) => {
-  return transform(options);
+export interface ITestOptions {
+  _fetch: typeof nodeFetch;
+}
+
+export const getAttacher = (testOptions?: ITestOptions) => {
+  const attacher = (options: Options) => {
+    return transform(options, testOptions);
+  };
+  return attacher;
 };
 
-export default attacher;
+export default getAttacher();

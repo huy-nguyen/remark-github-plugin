@@ -1,9 +1,10 @@
 import parse from 'github-url-parse';
-import fetch, {
+import nodeFetch, {
   Response,
 } from 'node-fetch';
 
-export const fetchGithubFile = async (githubUrl: string, token: string): Promise<string> => {
+export const fetchGithubFile =
+  async (githubUrl: string, token: string, fetchFunction: typeof nodeFetch): Promise<string> => {
 
   const parseResult = parse(githubUrl);
   if (parseResult !== null) {
@@ -13,7 +14,7 @@ export const fetchGithubFile = async (githubUrl: string, token: string): Promise
 
     let response: Response;
     try {
-      response = await fetch(fetchUrl, {
+      response = await fetchFunction(fetchUrl, {
         headers: {
           Authorization: `token ${token}`,
         },
