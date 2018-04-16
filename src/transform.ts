@@ -4,6 +4,13 @@ export interface IOptions {
   marker: string;
 }
 
+interface INodeToChange {
+  node: any; // Actually a remark paragraph node:
+  link: string;
+  range: string | undefined;
+  language: string | undefined;
+}
+
 type CheckResult = {
   isCandidate: true;
   link: string;
@@ -68,17 +75,22 @@ const checkNode = (embedMarker: string, node: any): CheckResult => {
 
 };
 export const transform = ({marker}: IOptions) => (tree: any) => new Promise((resolve) => {
+  const nodesToChange: INodeToChange[] = [];
   const visitor = (node: any) => {
     const checkResult = checkNode(marker, node);
     if (checkResult.isCandidate === true) {
       const {language, link, range} = checkResult;
-      node.type = 'code';
-      node.children = undefined;
-      node.lang = (language === undefined) ? null : language;
-      node.value = `const link = '${link}';\nconst range = '${range}';`;
+      nodesToChange.push({node, link, range, language});
     }
   };
 
   visit(tree, 'paragraph', visitor);
+
+  for (const {node, link, language, range} of nodesToChange) {
+    node.type = 'code';
+    node.children = undefined;
+    node.lang = (language === undefined) ? null : language;
+    node.value = `const link = '${link}';\nconst range = '${range}';`;
+  }
   resolve();
 });
