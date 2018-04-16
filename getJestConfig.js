@@ -12,7 +12,7 @@ exports.getJestConfig = (isCI) => {
       '^.+\\.jsx?$': 'babel-jest',
     },
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-    coveragePathIgnorePatterns: ['/node_modules/', 'setupTests.js'],
+    coveragePathIgnorePatterns: ['/node_modules/', 'setupTests.js', '__fixtures__'],
     testPathIgnorePatterns,
     transformIgnorePatterns: [
       '<rootDir>/node_modules/(?!lodash-es)',
