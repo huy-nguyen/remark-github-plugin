@@ -2,6 +2,22 @@ import sortBy from 'lodash-es/sortBy';
 import sortedUniq from 'lodash-es/sortedUniq';
 import {parse} from 'parse-numeric-range';
 
+interface ILine {
+  number: number;
+  content: string;
+}
+
+// Position `content` at the same level of indentation as `prevLine`:
+const addLeadingIndentation = (prevLine: string, currentLine: string): string => {
+  const matched = prevLine.match(/^([ \t]+).*/);
+  if (matched === null) {
+    return currentLine;
+  } else {
+    const [, indentation] = matched;
+    return `${indentation}${currentLine}`;
+  }
+};
+
 export const extractLines = (rawFileContent: string, range: string, ellipsisComment?: string): string => {
   const lineTerminator = '\n';
   const rawLines = rawFileContent.split(lineTerminator);
@@ -23,31 +39,35 @@ export const extractLines = (rawFileContent: string, range: string, ellipsisComm
   const lineNumbers = sortedUniq(sortBy(filteredLineNumbers));
 
   const result: string[] = [];
-  let prevLineNumber: number | undefined;
+  let prevLine: ILine | undefined;
   for (const currentLineNumber of lineNumbers) {
     if (ellipsisComment !== undefined) {
       // Insert ellipsis comment if the currently processed line is not
       // right after the last processed line OR if the first line is not included
       // in the range:
-      if (prevLineNumber !== undefined && prevLineNumber < currentLineNumber - 1) {
-        result.push(ellipsisComment);
-      } else if (prevLineNumber === undefined && currentLineNumber > 1) {
+      if (prevLine !== undefined && prevLine.number < currentLineNumber - 1) {
+        const {content} = prevLine;
+        result.push(addLeadingIndentation(content, ellipsisComment));
+      } else if (prevLine === undefined && currentLineNumber > 1) {
         result.push(ellipsisComment);
       }
     }
     const retrievedLine = rawLines[currentLineNumber - 1];
     if (retrievedLine !== undefined) {
       result.push(retrievedLine);
+      prevLine = {
+        number: currentLineNumber,
+        content: retrievedLine,
+      };
     }
-    prevLineNumber = currentLineNumber;
   }
 
   // Insert an ellipsis comment if line subset ends before end of file:
-  if (prevLineNumber !== undefined &&
-      prevLineNumber < adjustedLinesLength &&
+  if (prevLine !== undefined &&
+      prevLine.number < adjustedLinesLength &&
       ellipsisComment !== undefined) {
 
-    result.push(ellipsisComment);
+    result.push(addLeadingIndentation(prevLine.content, ellipsisComment));
   }
 
   return result.join(lineTerminator);

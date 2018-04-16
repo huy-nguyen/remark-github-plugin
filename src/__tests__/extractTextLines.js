@@ -4,13 +4,13 @@ import {
 
 const fileContent =
 `line 1
-line 2
+  line 2
 line 3
-line 4
+  line 4
 line 5
-line 6
+  line 6
 line 7
-line 8
+  line 8
 `;
 
 describe('When ellipsis comment is NOT provided', () => {
@@ -19,7 +19,7 @@ describe('When ellipsis comment is NOT provided', () => {
     const expected =
 `line 1
 line 3
-line 4
+  line 4
 line 5`;
     expect(actual).toEqual(expected);
   });
@@ -29,7 +29,7 @@ line 5`;
     const expected =
 `line 1
 line 3
-line 4
+  line 4
 line 5`;
     expect(actual).toEqual(expected);
   });
@@ -40,13 +40,13 @@ describe('When ellipsis comment is provided', () => {
     const actual = extractLines(fileContent, '2-8', 'comment');
     const expected =
 `comment
-line 2
+  line 2
 line 3
-line 4
+  line 4
 line 5
-line 6
+  line 6
 line 7
-line 8`;
+  line 8`;
     expect(actual).toEqual(expected);
   });
 
@@ -54,9 +54,9 @@ line 8`;
     const actual = extractLines(fileContent, '1-5', 'comment');
     const expected =
 `line 1
-line 2
+  line 2
 line 3
-line 4
+  line 4
 line 5
 comment`;
     expect(actual).toEqual(expected);
@@ -66,13 +66,13 @@ comment`;
     const actual = extractLines(fileContent, '1-2,4-6,8', 'comment');
     const expected =
 `line 1
-line 2
-comment
-line 4
+  line 2
+  comment
+  line 4
 line 5
-line 6
-comment
-line 8`;
+  line 6
+  comment
+  line 8`;
     expect(actual).toEqual(expected);
   });
 });
