@@ -1,8 +1,16 @@
 This is a test of the plugin
 
-Should transform this:
+Should not include language or range in code block:
 
 GITHUB-EMBED https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc GITHUB-EMBED
+
+Should include language but not range in code block:
+
+GITHUB-EMBED https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc javascript GITHUB-EMBED
+
+Should include language and range in code block:
+
+GITHUB-EMBED https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc javascript 1,3-5 GITHUB-EMBED
 
 Should not transform this:
 

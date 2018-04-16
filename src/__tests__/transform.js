@@ -41,7 +41,11 @@ describe('Remark transformer', () => {
         options = {};
       }
 
-      const processor = remark().use(plugin, options);
+      const processor = remark().data(
+        // Need this setting so that code blocks with no language is rendered as
+        // code blocks:
+        'settings', {fences: true}).use(plugin, options
+      );
       processor.process(input, (err, actual) => {
         if (err) {
           throw new Error(err);
