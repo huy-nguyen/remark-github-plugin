@@ -10,7 +10,8 @@
   "author": "Huy Nguyen <me@huynguyen.io> (https://www.huynguyen.io/)",
   "license": "MIT",
   "dependencies": {
-    "github-url-parse": "0.1.0"
+    "github-url-parse": "0.1.0",
+    "unist-util-visit": "1.3.0"
   },
   "main": "lib/index.js",
   "scripts": {

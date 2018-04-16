@@ -6,6 +6,7 @@ import plugin from '../index';
 const fixtureDirName = '__fixtures__';
 const inputFileName = 'input.md';
 const expectedFileName = 'expected.md';
+const optionsFileName = 'options.js';
 
 describe('Remark transformer', () => {
   const fixturesDir = path.resolve(path.join(__dirname, '..'), fixtureDirName);
@@ -32,7 +33,15 @@ describe('Remark transformer', () => {
       const expectedFilePath = path.join(fixtureDir, expectedFileName);
       const expected = fs.readFileSync(expectedFilePath, 'utf8');
 
-      const processor = remark().use(plugin);
+      const optionsFilePath = path.join (fixtureDir, optionsFileName);
+      let options;
+      try {
+        options = require(optionsFilePath);
+      } catch(e) {
+        options = {};
+      }
+
+      const processor = remark().use(plugin, options);
       processor.process(input, (err, actual) => {
         if (err) {
           throw new Error(err);
