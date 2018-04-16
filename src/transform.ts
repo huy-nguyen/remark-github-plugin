@@ -1,5 +1,8 @@
 import visit from 'unist-util-visit';
 import {
+  extractLines,
+} from './extractLines';
+import {
   fetchGithubFile,
 } from './fetchGithubContent';
 
@@ -90,11 +93,19 @@ export const transform = ({marker, token}: IOptions) => (tree: any) => new Promi
 
   visit(tree, 'paragraph', visitor);
 
-  for (const {node, link, language} of nodesToChange) {
+  for (const {node, link, language, range} of nodesToChange) {
     node.type = 'code';
     node.children = undefined;
     node.lang = (language === undefined) ? null : language;
-    const fileContent = await fetchGithubFile(link, token);
+    const rawFileContent = await fetchGithubFile(link, token);
+
+    let fileContent: string;
+    if (range === undefined) {
+      fileContent = rawFileContent;
+    } else {
+      fileContent = extractLines(rawFileContent, range);
+    }
+
     node.value = fileContent;
   }
   resolve();

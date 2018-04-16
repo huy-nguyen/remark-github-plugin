@@ -10,7 +10,7 @@ GITHUB-EMBED https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc javasc
 
 Should include language and range in code block:
 
-GITHUB-EMBED https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc javascript 1,3-5 GITHUB-EMBED
+GITHUB-EMBED https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc javascript 1,5-8,14 GITHUB-EMBED
 
 Should not transform this:
 

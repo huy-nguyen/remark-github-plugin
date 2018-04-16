@@ -44,20 +44,11 @@ Should include language and range in code block:
 
 ```javascript
 {
-  "presets": [
-    [
-      "env", {
         "targets": {
           "node": "current",
         },
         "spec": true
-      }
-    ]
-  ],
-  "plugins": [
-  ]
 }
-
 ```
 
 Should not transform this:
