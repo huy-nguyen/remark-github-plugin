@@ -1,1 +1,9 @@
 node_modules
+coverage
+.env
+src/__fixtures__/*/cache
+lib/*
+dist/*
+es/*
+.rpt2_cache
+junit.xml
