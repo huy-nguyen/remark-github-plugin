@@ -17,7 +17,6 @@ let plugins = [
     check: true,
   }),
   resolve({
-    browser: true,
     module: true,
   }),
   commonjs({
