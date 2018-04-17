@@ -42,7 +42,8 @@
     "build:es": "npm run clean:es && rollup -c -o es/index.js -f es",
     "build:dist": "npm run clean:dist && rollup -c -o dist/index.js -f umd --name RemarkGithubPlugin --environment minify",
     "build": "npm run build:lib && npm run build:dist",
-    "validate": "npm run tsc && npm run test"
+    "validate": "npm run tsc && npm run test",
+    "lint": "npm run eslint && npm run tslint"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.42",
