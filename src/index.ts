@@ -17,3 +17,5 @@ export const getAttacher = (testOptions?: ITestOptions) => {
 };
 
 export default getAttacher();
+
+export {transform};
