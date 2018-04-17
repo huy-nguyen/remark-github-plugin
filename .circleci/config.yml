@@ -64,6 +64,9 @@ jobs:
           keys:
             - dependency-cache-v1-{{ checksum "yarn.lock" }}
       - run:
+          name: Prepare NPM auth token
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run:
           name: Publish to npm
           command: npm run publish
 
