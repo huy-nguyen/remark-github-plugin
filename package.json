@@ -1,6 +1,6 @@
 {
   "name": "remark-github-plugin",
-  "version": "0.1.0",
+  "version": "0.0.0-semantic-release",
   "description": "Remark plugin to inline GitHub source code into markdown file as code blocks",
   "keywords": [
     "remark",
@@ -24,6 +24,10 @@
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "module": "es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huy-nguyen/remark-github-plugin.git"
+  },
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "commit": "commit",
@@ -43,7 +47,8 @@
     "build:dist": "npm run clean:dist && rollup -c -o dist/index.js -f umd --name RemarkGithubPlugin --environment minify",
     "build": "npm run build:lib && npm run build:dist",
     "validate": "npm run tsc && npm run test",
-    "lint": "npm run eslint && npm run tslint"
+    "lint": "npm run eslint && npm run tslint",
+    "publish": "semantic-release"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.42",
@@ -73,6 +78,7 @@
     "rollup-plugin-node-resolve": "3.3.0",
     "rollup-plugin-typescript2": "0.13.0",
     "rollup-plugin-uglify": "3.0.0",
+    "semantic-release": "15.1.7",
     "ts-jest": "22.4.2",
     "tslint": "5.8.0",
     "typescript": "2.8.1"

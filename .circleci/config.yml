@@ -51,6 +51,19 @@ jobs:
       - store_artifacts:
           path: reports/junit
 
+  publish:
+    docker:
+      - image: circleci/node:9.10.1
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore build results cache
+          key: build-output-v1-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: Publish to npm
+          command: npm run publish
+
+
 
 workflows:
   version: 2
@@ -60,3 +73,11 @@ workflows:
       - test:
           requires:
             - build
+      - publish:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only:
+                - master
