@@ -51,19 +51,14 @@ export default (testType) => {
         const cacheDir = path.join(fixtureDir, cacheDirName);
 
         const optionsFilePath = path.join (fixtureDir, configFileName);
-        let specifiedOPtions, testConfig;
+        let options, testConfig;
         try {
           testConfig = require(optionsFilePath);
-          specifiedOPtions = testConfig.pluginOptions;
+          options = testConfig.pluginOptions;
         } catch(e) {
-          specifiedOPtions = {};
+          options = {};
           testConfig = {};
         }
-
-        const options = {
-          ...specifiedOPtions,
-          token: process.env.GITHUB_TOKEN,
-        };
 
         const mockFetch = jest.fn((...args) => nodeFetch(...args));
 
