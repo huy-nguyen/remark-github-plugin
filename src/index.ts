@@ -16,6 +16,5 @@ export const getAttacher = (testOptions?: ITestOptions) => {
   return attacher;
 };
 
-export default getAttacher();
-
-export {transform};
+const plugin = getAttacher();
+export {plugin , transform};
