@@ -62,7 +62,35 @@ process.process(input, (err, output) => {
 })
 ```
 
-With the above config, this [sample input](src/__fixtures__/with-cache/input.md) will produce this [output](src/__fixtures__/with-cache/expected.md) (Click )
+## Sample input and output
+
+To embed a GitHub file, copy theURL of that file from the browser's location bar and paste it into a new Markdown paragraph that begins and ends with the `marker` phrase. Preferably, that URL should be a [permanent link](https://help.github.com/articles/getting-permanent-links-to-files/) so that the content you're pointing to doesn't change without your knowledge in the future.
+
+For example, with the above config, to embed the file [https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc](https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc), do this:
+
+![Sample input with no language and no line range](img/no-language-no-range-input.png)
+
+This is the Markdown output of the plugin:
+
+![Sample output with no language and no line range](img/no-language-no-range-output.png)
+
+You can specify what syntax highlighting should be used by adding a [PrismJs-compatible language code](http://prismjs.com/#languages-list):
+
+![Sample input with language but no line range](img/have-language-no-range-input.png)
+
+This is the Markdown output of the plugin:
+
+![Sample output with language but no line range](img/have-language-no-range-output.png)
+
+You can even pick out individual lines or line ranges from the file.
+
+![Sample input with language and line range](img/have-language-have-range-input.png)
+
+This is the Markdown output of the plugin:
+
+![Sample output with language and line range](img/have-language-have-range-output.png)
+
+For a list of supported notations, [click here](https://github.com/euank/node-parse-numeric-range#supported-expressions).
 
 ## Configuration
 - `marker` (`string`, required): a string to mark the start and end of an embed block e.g. `GITHUB-EMBED`. This string should not have any Markdown special Markdown formatting in there. For exapmle, `GITHUB_EMBED` won't work because before `remark` would have processed it into `GITHUB` and italicized `EMBED`, causing this plugin to not recognize the marker.

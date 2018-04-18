@@ -50,21 +50,19 @@ const checkNode = (embedMarker: string, node: any): CheckResult => {
     };
   } else {
     const firstChild = children[0];
-    const firstChildContent = firstChild.value.trim();
 
     const lastChild = children[numChildren - 1];
-    const lastChildContent = lastChild.value.trim();
 
     const [linkChild ] = children.slice(1, numChildren - 1);
 
     if (firstChild.type === 'text' &&
-        firstChildContent.includes(embedMarker) &&
+        firstChild.value.trim().includes(embedMarker) &&
         lastChild.type === 'text' &&
-        lastChildContent.includes(embedMarker) &&
+        lastChild.value.trim().includes(embedMarker) &&
         linkChild.type === 'link') {
 
       // Ref https://stackoverflow.com/a/14912552/7075699
-      const matched = lastChildContent.match(/\S+/g);
+      const matched = lastChild.value.trim().match(/\S+/g);
       let range: string | undefined, language: string | undefined;
       if (matched.length === 3) {
         // If there are 2 settings, the first is the language and the second the

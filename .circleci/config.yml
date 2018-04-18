@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.10.1
+      - image: circleci/node:9
     steps:
       - checkout
       - restore_cache:
@@ -28,7 +28,7 @@ jobs:
             - es
   test:
     docker:
-      - image: circleci/node:9.10.1
+      - image: circleci/node:9
     steps:
       - checkout
       - restore_cache:
@@ -53,7 +53,7 @@ jobs:
 
   publish:
     docker:
-      - image: circleci/node:9.10.1
+      - image: circleci/node:9
     steps:
       - checkout
       - restore_cache:
