@@ -11,7 +11,7 @@ test('Should handle failed AJAX request to valid GitHub URL', async () => {
   fetch.mockRejectedValue(new Error('Network error'));
   try {
     await fetchGithubFile(
-      'https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc', token, fetch
+      'https://github.com/lodash/lodash/blob/2900cfd/sumBy.js', token, fetch
     );
   } catch (e) {
     expect(e.message).toMatch(/Network error/);
