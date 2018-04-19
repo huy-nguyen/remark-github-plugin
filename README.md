@@ -94,7 +94,7 @@ This is the Markdown output of the plugin:
 For a list of supported notations, [click here](https://github.com/euank/node-parse-numeric-range#supported-expressions).
 
 ## Configuration
-- `marker` (`string`, required): a string to mark the start and end of an embed block e.g. `GITHUB-EMBED`. This string should not have any Markdown special Markdown formatting in there. For exapmle, `GITHUB_EMBED` won't work because before `remark` would have processed it into `GITHUB` and italicized `EMBED`, causing this plugin to not recognize the marker.
+- `marker` (`string`, required): a string to mark the start and end of an embed block e.g. `GITHUB-EMBED`. This string should not have any special Markdown formatting in there. For exapmle, `GITHUB_EMBED` won't work because before this plugin ever sees that phrase, `remark` would have processed it into a `GITHUB` regular text node and an `EMBED` italicized text node, causing this plugin to not recognize the marker.
 - `insertEllipsisComments` (`boolean`, required): whether or not to insert line comments between noncontiguous portions of code. For example, if you chose to insert only lines 1 and 4 of a file into a code block, setting this to `true` will insert a line comment like `// ...` between lines 1 and 4.
   - `ellipsisPhrase` (`string`, required if `insertEllipsisComments` is `true`): The phrase to follow the line comment marker. For example `...` will insert `// ...` between noncontiguous portions of code.
 - `useCache` (`boolean`, required): if `true`, the responses of AJAX calls to GitHub will be cached.

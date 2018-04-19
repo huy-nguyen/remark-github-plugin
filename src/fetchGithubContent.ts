@@ -10,7 +10,7 @@ export const fetchGithubFile =
   if (parseResult !== null) {
     // If the provided URL is a valid GitHub URL:
     const {branch, path, repo, user} = parseResult;
-    const fetchUrl = `https://api.github.com/repos/${user}/${repo}/contents/${path}?branch=${branch}`;
+    const fetchUrl = `https://api.github.com/repos/${user}/${repo}/contents/${path}?ref=${branch}`;
 
     let response: Response;
     try {

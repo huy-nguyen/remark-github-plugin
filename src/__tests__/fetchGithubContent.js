@@ -7,11 +7,11 @@ const token = process.env.GITHUB_TOKEN;
 
 test('Should succeed with valid GitHub URL', async () => {
   const actual = await fetchGithubFile(
-    'https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc',
+    'https://github.com/lodash/lodash/blob/2900cfd/sumBy.js',
     token,
     fetch,
   );
-  expect(actual.startsWith('{\n  "presets": [')).toBe(true);
+  expect(actual.startsWith('import baseIteratee from \'./_baseIteratee.js\';')).toBe(true);
 });
 
 test('Should throw if called with invalid GitHub URL', async () => {
@@ -27,7 +27,7 @@ test('Should throw when given URL points to non-existent GitHub content', async 
   expect.assertions(1);
   try {
     await fetchGithubFile(
-      'https://github.com/huy-nguyen/squarify/blob/d7074c2/someFile',
+      'https://github.com/lodash/lodash/blob/2900cfd/someFile.js',
       token,
       fetch
     );
@@ -40,7 +40,7 @@ test('Should throw when given URL points to a GitHub directory', async () => {
   expect.assertions(1);
   try {
     await fetchGithubFile(
-      'https://github.com/huy-nguyen/squarify/blob/d7074c2/src',
+      'https://github.com/lodash/lodash/tree/2900cfd/.github',
       token,
       fetch
     );
