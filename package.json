@@ -49,7 +49,8 @@
     "build": "npm run build:lib && npm run build:dist",
     "validate": "npm run tsc && npm run test",
     "lint": "npm run eslint && npm run tslint",
-    "publish": "semantic-release"
+    "publish": "semantic-release",
+    "codecov": "codecov"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.42",
@@ -64,6 +65,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "8.2.2",
     "babel-jest": "22.4.3",
+    "codecov": "3.0.0",
     "dotenv": "5.0.1",
     "eslint": "4.19.1",
     "eslint-plugin-jest": "21.15.0",
