@@ -3,6 +3,7 @@
 [![npm](https://img.shields.io/npm/v/remark-github-plugin.svg?style=flat-square)](https://www.npmjs.com/package/remark-github-plugin)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![CircleCI](https://circleci.com/gh/huy-nguyen/remark-github-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/huy-nguyen/remark-github-plugin/tree/master)
+[![codecov](https://codecov.io/gh/huy-nguyen/remark-github-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/huy-nguyen/remark-github-plugin)
 
 This `remark` plugin replace links to GitHub files with the actual content of those files, wrapped in Markdown code blocks that can optionally be further processed by a syntax highlighter (e.g. [Prism](http://prismjs.com/)).
 
