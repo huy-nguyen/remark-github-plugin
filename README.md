@@ -100,3 +100,16 @@ For a list of supported notations, [click here](https://github.com/euank/node-pa
 - `useCache` (`boolean`, required): if `true`, the responses of AJAX calls to GitHub will be cached.
   - `cacheKey` (`string`, required if `useCache` is true): this is used for cache busting or to differentiate between potentially other caches stored by [`async-disk-cache`](https://www.npmjs.com/package/async-disk-cache) (which is the caching library used by this package).
 - `token` (`string`, required): A [GitHub personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) with the [`public_repo` scope](https://developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps/#available-scopes) (if you only need to fetch content from public repos) or [`repo` scope](https://developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps/#available-scopes) (if you need to also access private repos).
+
+## Contributors
+
+Thanks goes to these people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars1.githubusercontent.com/u/7352279?v=4" width="100px;"/><br /><sub><b>Huy Nguyen</b></sub>](https://www.huynguyen.io/)<br />[📝](#blog-huy-nguyen "Blogposts") [🐛](https://github.com/huy-nguyen/remark-github-plugin/issues?q=author%3Ahuy-nguyen "Bug reports") [💻](https://github.com/huy-nguyen/remark-github-plugin/commits?author=huy-nguyen "Code") [📖](https://github.com/huy-nguyen/remark-github-plugin/commits?author=huy-nguyen "Documentation") [💡](#example-huy-nguyen "Examples") [🤔](#ideas-huy-nguyen "Ideas, Planning, & Feedback") [🚇](#infra-huy-nguyen "Infrastructure (Hosting, Build-Tools, etc)") [👀](#review-huy-nguyen "Reviewed Pull Requests") [⚠️](https://github.com/huy-nguyen/remark-github-plugin/commits?author=huy-nguyen "Tests") [🔧](#tool-huy-nguyen "Tools") [✅](#tutorial-huy-nguyen "Tutorials") |
+| :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
+Contributions of any kind welcome!

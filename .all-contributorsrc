@@ -1,0 +1,31 @@
+{
+  "projectName": "remark-github-plugin",
+  "projectOwner": "huy-nguyen",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "huy-nguyen",
+      "name": "Huy Nguyen",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7352279?v=4",
+      "profile": "https://www.huynguyen.io/",
+      "contributions": [
+        "blog",
+        "bug",
+        "code",
+        "doc",
+        "example",
+        "ideas",
+        "infra",
+        "review",
+        "test",
+        "tool",
+        "tutorial"
+      ]
+    }
+  ],
+  "repoType": "github"
+}
