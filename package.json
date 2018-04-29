@@ -36,7 +36,7 @@
     "tslint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "test": "jest --verbose --coverage",
     "test:watch": "jest --watch --verbose",
-    "test:ci": "jest --config=jestCI.config.js --ci --verbose --coverage --runInBand --no-cache --testResultsProcessor=\"jest-junit\"",
+    "test:ci": "jest --config=jestCI.config.js --ci --verbose --coverage --runInBand --testResultsProcessor=\"jest-junit\"",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "tsc": "tsc --noEmit",
@@ -55,8 +55,8 @@
     "contributors:generate": "all-contributors generate"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.46",
-    "@babel/preset-env": "7.0.0-beta.46",
+    "@babel/core": "7.0.0-beta.42",
+    "@babel/preset-env": "7.0.0-beta.42",
     "@cid-harvard/eslint-config": "0.1.2",
     "@cid-harvard/tslint-config": "0.3.0",
     "@commitlint/cli": "6.1.3",
