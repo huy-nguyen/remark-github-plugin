@@ -15,7 +15,7 @@ line 7
 
 describe('When ellipsis comment is NOT provided', () => {
   test('when line range is in order', () => {
-    const actual = extractLines(fileContent, '1,3-5');
+    const actual = extractLines(fileContent, '1,3-5', []);
     const expected =
 `line 1
 line 3
@@ -25,7 +25,7 @@ line 5`;
   });
 
   test('when line range is out of order', () => {
-    const actual = extractLines(fileContent, '3-5,1');
+    const actual = extractLines(fileContent, '3-5,1', []);
     const expected =
 `line 1
 line 3
@@ -37,7 +37,7 @@ line 5`;
 
 describe('When ellipsis comment is provided', () => {
   test('First line is not included in range', () => {
-    const actual = extractLines(fileContent, '2-8', 'comment');
+    const actual = extractLines(fileContent, '2-8', [], 'comment');
     const expected =
 `comment
   line 2
@@ -51,7 +51,7 @@ line 7
   });
 
   test('Last line is not included in range', () => {
-    const actual = extractLines(fileContent, '1-5', 'comment');
+    const actual = extractLines(fileContent, '1-5', [], 'comment');
     const expected =
 `line 1
   line 2
@@ -63,7 +63,7 @@ comment`;
   });
 
   test('Intermediate lines not included in range', () => {
-    const actual = extractLines(fileContent, '1-2,4-6,8', 'comment');
+    const actual = extractLines(fileContent, '1-2,4-6,8', [], 'comment');
     const expected =
 `line 1
   line 2

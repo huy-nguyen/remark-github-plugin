@@ -42,6 +42,9 @@ export default sumBy;
 Should include language but not range in code block:
 
 ```javascript
+/**
+ * https://github.com/lodash/lodash/blob/2900cfd/sumBy.js
+ */
 import baseIteratee from './_baseIteratee.js';
 import baseSum from './_baseSum.js';
 
@@ -81,6 +84,9 @@ export default sumBy;
 Should include language and range in code block:
 
 ```javascript
+/**
+ * https://github.com/lodash/lodash/blob/2900cfd/sumBy.js
+ */
 import baseIteratee from './_baseIteratee.js';
 import baseSum from './_baseSum.js';
 // ...
