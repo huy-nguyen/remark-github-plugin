@@ -17,11 +17,11 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Build
-          command: npm run build
-      - run:
           name: greenkeeper update yarn lock file
           command: npm run greenkeeper-lockfile-update
+      - run:
+          name: Build
+          command: npm run build
       - run:
           name: Run unit tests
           command: npm run test:ci
