@@ -19,25 +19,6 @@ jobs:
       - run:
           name: Build
           command: npm run build
-      - save_cache:
-          name: Save build output cache
-          key: build-output-v1-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - dist
-            - lib
-            - es
-  test:
-    docker:
-      - image: circleci/node:9
-    steps:
-      - checkout
-      - restore_cache:
-          name: Restore dependency cache
-          keys:
-            - dependency-cache-v1-{{ checksum "yarn.lock" }}
-      - restore_cache:
-          name: Restore build results cache
-          key: build-output-v1-{{ .Branch }}-{{ .Revision }}
       - run:
           name: Run unit tests
           command: npm run test:ci
@@ -53,6 +34,14 @@ jobs:
           path: reports/junit
       - store_artifacts:
           path: reports/junit
+
+      - save_cache:
+          name: Save build output cache
+          key: build-output-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - dist
+            - lib
+            - es
 
   publish:
     docker:
@@ -77,16 +66,12 @@ jobs:
 
 workflows:
   version: 2
-  build_test_publish:
+  build_publish:
     jobs:
       - build
-      - test:
-          requires:
-            - build
       - publish:
           requires:
             - build
-            - test
           filters:
             branches:
               only:
