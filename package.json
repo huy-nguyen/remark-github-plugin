@@ -88,5 +88,21 @@
     "ts-jest": "22.4.4",
     "tslint": "5.8.0",
     "typescript": "2.8.3"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "tslint",
+      "@babel/core",
+      "@babel/preset-env"
+    ],
+    "commitMessages": {
+      "initialBadge": "docs: Add Greenkeeper badge",
+      "initialDependencies": "build: update dependencies",
+      "initialBranches": "build: whitelist greenkeeper branches",
+      "dependencyUpdate": "build: update ${dependency} to version ${version}",
+      "devDependencyUpdate": "build: update ${dependency} to version ${version}",
+      "dependencyPin": "build: pin ${dependency} to ${oldVersion}",
+      "devDependencyPin": "build: pin ${dependency} to ${oldVersion}"
+    }
   }
 }
