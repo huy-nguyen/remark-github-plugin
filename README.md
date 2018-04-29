@@ -1,5 +1,7 @@
 # remark-github-plugin
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/huy-nguyen/remark-github-plugin.svg)](https://greenkeeper.io/)
+
 [![npm](https://img.shields.io/npm/v/remark-github-plugin.svg?style=flat-square)](https://www.npmjs.com/package/remark-github-plugin)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![CircleCI](https://circleci.com/gh/huy-nguyen/remark-github-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/huy-nguyen/remark-github-plugin/tree/master)
