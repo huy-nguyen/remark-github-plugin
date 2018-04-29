@@ -3,10 +3,14 @@ import nodeFetch from 'node-fetch';
 import visit from 'unist-util-visit';
 import {
   extractLines,
+  lineTerminator,
 } from './extractLines';
 import {
   fetchGithubFile,
 } from './fetchGithubContent';
+import {
+  getHeaderLines,
+} from './getHeaderLines';
 import {
   ITestOptions,
 } from './index';
@@ -152,9 +156,16 @@ export const transform =
       rawFileContent = await fetchGithubFile(link, token, fetchFunction);
     }
 
+    const headerLines = getHeaderLines(link, language);
+
     let fileContent: string;
     if (range === undefined) {
-      fileContent = rawFileContent;
+      // Simply add the header to the beginning of the fetched file if there are
+      // no line ranges to process:
+      fileContent = [
+        ...headerLines,
+        ...rawFileContent.split(lineTerminator),
+      ].join(lineTerminator);
     } else {
       let ellipsisComment: string | undefined;
       if (options.insertEllipsisComments === true) {
@@ -162,7 +173,7 @@ export const transform =
       } else {
         ellipsisComment = undefined;
       }
-      fileContent = extractLines(rawFileContent, range, ellipsisComment);
+      fileContent = extractLines(rawFileContent, range, headerLines, ellipsisComment);
     }
 
     node.value = fileContent;

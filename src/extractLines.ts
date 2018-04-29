@@ -2,6 +2,8 @@ import sortBy from 'lodash-es/sortBy';
 import sortedUniq from 'lodash-es/sortedUniq';
 import {parse} from 'parse-numeric-range';
 
+export const lineTerminator = '\n';
+
 interface ILine {
   number: number;
   content: string;
@@ -18,8 +20,11 @@ const addLeadingIndentation = (prevLine: string, currentLine: string): string =>
   }
 };
 
-export const extractLines = (rawFileContent: string, range: string, ellipsisComment?: string): string => {
-  const lineTerminator = '\n';
+export const extractLines = (
+    rawFileContent: string,
+    range: string,
+    headerLines: string[],
+    ellipsisComment?: string): string => {
   const rawLines = rawFileContent.split(lineTerminator);
   const rawLinesLength = rawLines.length;
 
@@ -38,7 +43,7 @@ export const extractLines = (rawFileContent: string, range: string, ellipsisComm
   const filteredLineNumbers = rawLineNumbers.filter(lineNumber => lineNumber > 0);
   const lineNumbers = sortedUniq(sortBy(filteredLineNumbers));
 
-  const result: string[] = [];
+  const result: string[] = headerLines;
   let prevLine: ILine | undefined;
   for (const currentLineNumber of lineNumbers) {
     if (ellipsisComment !== undefined) {

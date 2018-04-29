@@ -69,7 +69,7 @@ process.process(input, (err, output) => {
 
 To embed a GitHub file, copy theURL of that file from the browser's location bar and paste it into a new Markdown paragraph that begins and ends with the `marker` phrase. Preferably, that URL should be a [permanent link](https://help.github.com/articles/getting-permanent-links-to-files/) so that the content you're pointing to doesn't change without your knowledge in the future.
 
-For example, with the above config, to embed the file [https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc](https://github.com/huy-nguyen/squarify/blob/d7074c2/.babelrc), do this:
+For example, with the above config, to embed the file [https://github.com/lodash/lodash/blob/2900cfd/sumBy.js](https://github.com/lodash/lodash/blob/2900cfd/sumBy.js), do this:
 
 ![Sample input with no language and no line range](img/no-language-no-range-input.png)
 
@@ -89,18 +89,21 @@ You can even pick out individual lines or line ranges from the file.
 
 ![Sample input with language and line range](img/have-language-have-range-input.png)
 
+In this case, we picked line 1, line 2 and lines 27 through 31.
 This is the Markdown output of the plugin:
 
 ![Sample output with language and line range](img/have-language-have-range-output.png)
 
-For a list of supported notations, [click here](https://github.com/euank/node-parse-numeric-range#supported-expressions).
+For a list of supported line range notations, [click here](https://github.com/euank/node-parse-numeric-range#supported-expressions).
 
 ## Configuration
 - `marker` (`string`, required): a string to mark the start and end of an embed block e.g. `GITHUB-EMBED`. This string should not have any special Markdown formatting in there. For exapmle, `GITHUB_EMBED` won't work because before this plugin ever sees that phrase, `remark` would have processed it into a `GITHUB` regular text node and an `EMBED` italicized text node, causing this plugin to not recognize the marker.
 - `insertEllipsisComments` (`boolean`, required): whether or not to insert line comments between noncontiguous portions of code. For example, if you chose to insert only lines 1 and 4 of a file into a code block, setting this to `true` will insert a line comment like `// ...` between lines 1 and 4.
   - `ellipsisPhrase` (`string`, required if `insertEllipsisComments` is `true`): The phrase to follow the line comment marker. For example `...` will insert `// ...` between noncontiguous portions of code.
-- `useCache` (`boolean`, required): if `true`, the responses of AJAX calls to GitHub will be cached.
+- `useCache` (`boolean`, required): if `true` (recommended), the responses of AJAX calls to GitHub will be cached.
+The cache directory is inside the `TMPDIR` environment variable: `$TMPDIR/$USER/if-you-need-to-delete-this-open-an-issue-async-disk-cache/yourCacheKey`.
   - `cacheKey` (`string`, required if `useCache` is true): this is used for cache busting or to differentiate between potentially other caches stored by [`async-disk-cache`](https://www.npmjs.com/package/async-disk-cache) (which is the caching library used by this package).
+  If you include a version number in your cache key (e.g. `remark-github-plugin-v1`), an easy way to bust the cache is to increase the version (`remark-github-plugin-v2`).
 - `token` (`string`, required): A [GitHub personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) with the [`public_repo` scope](https://developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps/#available-scopes) (if you only need to fetch content from public repos) or [`repo` scope](https://developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps/#available-scopes) (if you need to also access private repos).
 
 ## Contributors
