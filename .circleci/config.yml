@@ -20,6 +20,9 @@ jobs:
           name: Build
           command: npm run build
       - run:
+          name: greenkeeper update yarn lock file
+          command: npm run greenkeeper-lockfile-update
+      - run:
           name: Run unit tests
           command: npm run test:ci
           environment:
@@ -27,6 +30,9 @@ jobs:
       - run:
           name: Run linters
           command: npm run lint
+      - run:
+          name: greenkeeper upload new yarn lock file
+          command: npm run greenkeeper-lockfile-upload
       - run:
           name: Upload coverage to codecov
           command: npm run codecov
