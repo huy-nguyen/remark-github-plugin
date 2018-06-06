@@ -1,5 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
-import uglify from 'rollup-plugin-uglify';
+import {terser} from 'rollup-plugin-terser';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import json from 'rollup-plugin-json';
@@ -29,7 +29,7 @@ let plugins = [
 ];
 
 if (shouldMinify) {
-  plugins = [...plugins, uglify()];
+  plugins = [...plugins, terser()];
 }
 
 
