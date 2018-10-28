@@ -972,10 +972,10 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.107.tgz#b2d2ae3958bfb8ff828495cbe12214af9e4d035e"
   integrity sha512-afvjfP2rl3yvtv2qrCRN23zIQcDinF+munMJCoHEw2BXF22QJogTlVfNPTACQ6ieDyA6VnyKT4WLuN/wK368ng==
 
-"@types/node-fetch@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-1.6.9.tgz#a750fb0f4cf2960bf72b462e4c86908022dd69c5"
-  integrity sha512-n2r6WLoY7+uuPT7pnEtKJCmPUGyJ+cbyBR8Avnu4+m1nzz7DwBVuyIvvlBzCZ/nrpC7rIgb3D6pNavL7rFEa9g==
+"@types/node-fetch@2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.1.2.tgz#8c5da14d70321e4c4ecd5db668e3f93cf6c7399f"
+  integrity sha512-XroxUzLpKuL+CVkQqXlffRkEPi4Gh3Oui/mWyS7ztKiyqVxiU+h3imCW5I2NQmde5jK+3q++36/Q96cyRWsweg==
   dependencies:
     "@types/node" "*"
 
