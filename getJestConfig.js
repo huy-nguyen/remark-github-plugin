@@ -8,7 +8,7 @@ exports.getJestConfig = (isCI) => {
   }
   return {
     transform: {
-      '^.+\\.tsx?$': 'ts-jest',
+      '^.+\\.tsx?$': 'babel-jest',
       '^.+\\.jsx?$': 'babel-jest',
     },
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
