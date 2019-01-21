@@ -1,23 +1,18 @@
-import typescript from 'rollup-plugin-typescript2';
 import {terser} from 'rollup-plugin-terser';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import json from 'rollup-plugin-json';
+import babel from 'rollup-plugin-babel';
 
-const shouldCompileDeclaration = !!process.env.declaration;
 const shouldMinify = !!process.env.minify;
 
 let plugins = [
-  typescript({
-    tsconfigOverride: {
-      compilerOptions: {
-        declaration: shouldCompileDeclaration,
-      },
-    },
-    check: true,
-  }),
   resolve({
-    module: true,
+    extensions: ['.ts'],
+  }),
+  babel({
+    exclude: 'node_modules/**',
+    extensions: ['.ts'],
   }),
   commonjs({
     namedExports: {
@@ -40,5 +35,4 @@ export default {
   },
   plugins,
   external: ['path', 'fs', 'os', 'tty', 'net', 'zlib', 'crypto', 'child_process', 'util', 'http', 'https', 'stream'],
-  exports: 'named',
 };
