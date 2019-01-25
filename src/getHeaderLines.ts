@@ -7,6 +7,7 @@ export const getHeaderLines = (link: string, language?: string): string[] => {
         return [`<!--`, `  ${link}`, `-->`];
 
       case 'css':
+      case 'reason':
         return [`/**`, ` * ${link}`, ` */`];
 
       case 'clike':

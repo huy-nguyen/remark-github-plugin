@@ -7,6 +7,7 @@ export const wrapInComment = (phrase: string, language?: string): string | undef
         return `<!-- ${phrase} -->`;
 
       case 'css':
+      case 'reason':
         return `/* ${phrase} */`;
 
       case 'clike':
