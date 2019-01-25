@@ -4,6 +4,8 @@
   "description": "Remark plugin to inline GitHub source code into markdown file as code blocks",
   "keywords": [
     "remark",
+    "plugin",
+    "remark-plugin",
     "github",
     "unified"
   ],
