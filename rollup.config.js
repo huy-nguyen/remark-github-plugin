@@ -8,7 +8,7 @@ const shouldMinify = !!process.env.minify;
 
 let plugins = [
   resolve({
-    extensions: ['.ts'],
+    extensions: ['.ts', '.js'],
   }),
   babel({
     exclude: 'node_modules/**',
