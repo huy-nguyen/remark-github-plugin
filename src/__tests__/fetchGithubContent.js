@@ -14,6 +14,15 @@ test('Should succeed with valid GitHub URL', async () => {
   expect(actual.startsWith('import baseIteratee from \'./_baseIteratee.js\';')).toBe(true);
 });
 
+test('Should succeed when GitHub branch contain slashes', async () => {
+  const actual = await fetchGithubFile(
+    'https://github.com/huy-nguyen/remark-github-plugin/blob/branch-for-unit-testing/do-not-delete/src/index.ts',
+    token,
+    fetch,
+  );
+  expect(actual.startsWith('import nodeFetch from \'node-fetch\';')).toBe(true);
+});
+
 test('Should throw if called with invalid GitHub URL', async () => {
   expect.assertions(1);
   try {
