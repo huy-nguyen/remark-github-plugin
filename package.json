@@ -14,7 +14,7 @@
     "lib",
     "es"
   ],
-  "author": "Huy Nguyen <me@huynguyen.io> (https://www.huynguyen.io/)",
+  "author": "Huy Nguyen <me@huy.dev> (https://www.huy.dev/)",
   "license": "MIT",
   "dependencies": {
     "async-disk-cache": "1.3.4",
