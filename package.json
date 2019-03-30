@@ -78,7 +78,7 @@
     "babel-jest": "23.6.0",
     "codecov": "3.2.0",
     "dotenv": "6.2.0",
-    "eslint": "5.15.1",
+    "eslint": "5.16.0",
     "eslint-plugin-jest": "22.3.0",
     "eslint-plugin-react": "7.12.4",
     "greenkeeper-lockfile": "1",
