@@ -1576,10 +1576,10 @@ astral-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
 
-async-disk-cache@1.3.4:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/async-disk-cache/-/async-disk-cache-1.3.4.tgz#a5c9f72f199a9933583659f57a0e11377884f816"
-  integrity sha512-qsIvGJ/XYZ5bSGf5vHt2aEQHZnyuehmk/+51rCJhpkZl4LtvOZ+STbhLbdFAJGYO+dLzUT5Bb4nLKqHBX83vhw==
+async-disk-cache@1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/async-disk-cache/-/async-disk-cache-1.3.5.tgz#cc6206ed79bb6982b878fc52e0505e4f52b62a02"
+  integrity sha512-VZpqfR0R7CEOJZ/0FOTgWq70lCrZyS1rkI8PXugDUkTKyyAUgZ2zQ09gLhMkEn+wN8LYeUTPxZdXtlX/kmbXKQ==
   dependencies:
     debug "^2.1.3"
     heimdalljs "^0.2.3"
