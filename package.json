@@ -22,7 +22,7 @@
     "lodash-es": "4.17.11",
     "node-fetch": "2.6.0",
     "parse-numeric-range": "0.0.2",
-    "unist-util-visit": "1.4.1"
+    "unist-util-visit": "2.0.2"
   },
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
