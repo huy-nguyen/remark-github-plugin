@@ -7457,10 +7457,10 @@ parse-json@^4.0.0:
     error-ex "^1.3.1"
     json-parse-better-errors "^1.0.1"
 
-parse-numeric-range@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/parse-numeric-range/-/parse-numeric-range-0.0.2.tgz#b4f09d413c7adbcd987f6e9233c7b4b210c938e4"
-  integrity sha1-tPCdQTx6282Yf26SM8e0shDJOOQ=
+parse-numeric-range@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/parse-numeric-range/-/parse-numeric-range-1.0.0.tgz#bd9472ec6642ef7e80a007396712922a95e12f21"
+  integrity sha512-DR/VMLGX/tRnBPMVFk/2O/SW0QNS3EC30hfNdMn3ryNq3mxfOXNS6udnxm2D/V3+5mTTtFkuh9b/qbMSGsaFvw==
 
 parse5@4.0.0:
   version "4.0.0"
