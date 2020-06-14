@@ -36,5 +36,7 @@ jobs:
         run: yarn build
       - name: Run unit tests
         run: yarn run test:ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.UNIT_TEST_GITHUB_TOKEN }}
       - name: Run linters
         run: yarn run lint
