@@ -37,6 +37,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.UNIT_TEST_GITHUB_TOKEN }}
       - name: Run linters
         run: yarn run lint
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v1
       - name: Publish to npm
         uses: cycjimmy/semantic-release-action@v2
         with:
