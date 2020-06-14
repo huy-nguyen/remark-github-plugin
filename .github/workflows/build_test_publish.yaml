@@ -1,12 +1,9 @@
 name: Build, test and publish to npm
-on:
-  pull_request:
-  push:
-   # TODO: restrict push to master branch
+on: [push, pull_request]
 
 jobs:
   build_test:
-    name: Build and test
+    name: Build, test and publish
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout code
@@ -46,5 +43,5 @@ jobs:
           semantic_version: 15.13.16
           branch: master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
