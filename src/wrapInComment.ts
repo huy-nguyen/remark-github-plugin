@@ -16,9 +16,7 @@ export const wrapInComment = (phrase: string, language?: string): string | undef
       case 'glsl':
       case 'json':
       case 'javascript':
-      case 'jsx':
       case 'typescript':
-      case 'tsx':
       case 'java':
         return `// ${phrase}`;
 
