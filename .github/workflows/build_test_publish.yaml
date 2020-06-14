@@ -40,3 +40,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.UNIT_TEST_GITHUB_TOKEN }}
       - name: Run linters
         run: yarn run lint
+      - name: Publish to npm
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          semantic_version: 15.13.16
+          branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
