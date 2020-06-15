@@ -21,7 +21,7 @@ import {
 export type Options = {
   marker: string;
   token: string;
-  includeLinkHeader: boolean;
+  includeLinkHeader?: boolean;
 } & (
   {insertEllipsisComments: true, ellipsisPhrase: string} |
   {insertEllipsisComments: false}
@@ -124,7 +124,7 @@ export const transform =
     }
   }
 
-  const {marker, token} = options;
+  const {marker, token, includeLinkHeader = true} = options;
   const nodesToChange: INodeToChange[] = [];
   const visitor = (node: any) => {
     const checkResult = checkNode(marker, node);
@@ -157,7 +157,6 @@ export const transform =
       rawFileContent = await fetchGithubFile(link, token, fetchFunction);
     }
 
-    const includeLinkHeader = options.includeLinkHeader == null ? true : options.includeLinkHeader;
     const headerLines = includeLinkHeader ? getHeaderLines(link, language) : [];
 
     let fileContent: string;
