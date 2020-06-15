@@ -21,6 +21,7 @@ import {
 export type Options = {
   marker: string;
   token: string;
+  includeLinkHeader: boolean;
 } & (
   {insertEllipsisComments: true, ellipsisPhrase: string} |
   {insertEllipsisComments: false}
@@ -156,7 +157,8 @@ export const transform =
       rawFileContent = await fetchGithubFile(link, token, fetchFunction);
     }
 
-    const headerLines = getHeaderLines(link, language);
+    const includeLinkHeader = options.includeLinkHeader == null ? true : options.includeLinkHeader;
+    const headerLines = includeLinkHeader ? getHeaderLines(link, language) : [];
 
     let fileContent: string;
     if (range === undefined) {
