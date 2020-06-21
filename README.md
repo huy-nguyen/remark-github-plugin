@@ -105,7 +105,7 @@ For a list of supported line range notations, [click here](https://github.com/eu
 The cache directory is inside the `TMPDIR` environment variable: `$TMPDIR/$USER/if-you-need-to-delete-this-open-an-issue-async-disk-cache/yourCacheKey`.
   - `cacheKey` (`string`, required if `useCache` is true): this is used for cache busting or to differentiate between potentially other caches stored by [`async-disk-cache`](https://www.npmjs.com/package/async-disk-cache) (which is the caching library used by this package).
   If you include a version number in your cache key (e.g. `remark-github-plugin-v1`), an easy way to bust the cache is to increase the version (`remark-github-plugin-v2`).
-- `includeLinkHeader` (`boolean`, defualts to true): If true includes a link to the embed github url in the code block.
+- `includeLinkHeader` (`boolean`, defaults to true): If true includes a link to the embed github url in the code block.
 - `token` (`string`, required): A [GitHub personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) with the [`public_repo` scope](https://developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps/#available-scopes) (if you only need to fetch content from public repos) or [`repo` scope](https://developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps/#available-scopes) (if you need to also access private repos).
 
 ## Contributors
